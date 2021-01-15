@@ -54,75 +54,79 @@ function computerTakeTurn(){
     cb[9] = document.getElementById("nine").innerHTML;
 	
 	//checks for possibilities of winning
-	if(cb[1] != "" && cb[1] == cb[2]){
+	if(cb[1] != "" && cb[1] == cb[2] && cb[3] == ""){
 		winDeny(2);
 		return;
-	} else if(cb[4] != "" && cb[4] == cb[5]){
+	} else if(cb[4] != "" && cb[4] == cb[5] && cb[6] == ""){
 		winDeny(5);
 		return;
-	} else if(cb[7] != "" && cb[7] == cb[8]){
+	} else if(cb[7] != "" && cb[7] == cb[8] && cb[9] == ""){
 		winDeny(8);
 		return;
-	} else if(cb[9] != "" && cb[9] == cb[8]){
+	} else if(cb[9] != "" && cb[9] == cb[8] && cb[7] == ""){
 		winDeny(6);
 		return;
-	} else if(cb[6] != "" && cb[6] == cb[5]){
+	} else if(cb[6] != "" && cb[6] == cb[5] && cb[4] == ""){
 		winDeny(3);
 		return;
-	} else if (cb[3] != "" && cb[3] == cb[2]){
+	} else if (cb[3] != "" && cb[3] == cb[2] && cb[1] == ""){
 		winDeny(0);
 		return;
-	} else if(cb[9] != "" && cb[9] == cb[7]){
+	} else if(cb[9] != "" && cb[9] == cb[7] && cb[8] == ""){
 		winDeny(7);
 		return;
-	} else if(cb[6] != "" && cb[6] == cb[4]){
+	} else if(cb[6] != "" && cb[6] == cb[4] && cb[5] == ""){
 		winDeny(4);
 		return;
-	} else if (cb[3] != "" && cb[3] == cb[1]){
+	} else if (cb[3] != "" && cb[3] == cb[1] && cb[2] == ""){
 		winDeny(1);
 		return;
-	} else if(cb[9] != "" && cb[9] == cb[3]){
+	} else if(cb[9] != "" && cb[9] == cb[3] && cb[6] == ""){
 		winDeny(5);
 		return;
-	} else if(cb[8] != "" && cb[8] == cb[2]){
+	} else if(cb[8] != "" && cb[8] == cb[2] && cb[5] == ""){
 		winDeny(4);
 		return;
-	} else if (cb[7] != "" && cb[1] == cb[7]){
+	} else if (cb[7] != "" && cb[1] == cb[7] && cb[4] == ""){
 		winDeny(3);
 		return;
-	} else if (cb[7] != "" && cb[3] == cb[7]){
+	} else if (cb[7] != "" && cb[3] == cb[7] && cb[5] == ""){
 		winDeny(4);
 		return;
-	} else if (cb[9] != "" && cb[1] == cb[9]){
+	} else if (cb[9] != "" && cb[1] == cb[9] && cb[5] == ""){
 		winDeny(4);
 		return;
-	} else if (cb[1] != "" && cb[1] == cb[5]){
+	} else if (cb[1] != "" && cb[1] == cb[5] && cb[9] == ""){
 		winDeny(8);
+		console.log("14");
 		return;
-	} else if (cb[3] != "" && cb[3] == cb[5]){
+	} else if (cb[3] != "" && cb[3] == cb[5] && cb[6] == ""){
 		winDeny(6);
 		return;
-	} else if(cb[1] != "" && cb[1] == cb[4]){
+	} else if(cb[1] != "" && cb[1] == cb[4] && cb[7] == ""){
 		winDeny(6);
 		return;
-	} else if(cb[2] != "" && cb[2] == cb[5]){
+	} else if(cb[2] != "" && cb[2] == cb[5] && cb[8] == ""){
 		winDeny(7);
 		return;
-	} else if(cb[3] != "" && cb[3] == cb[5]){
+	} else if(cb[3] != "" && cb[3] == cb[5] && cb[7] == ""){
 		winDeny(6);
 		return;
-	} else if(cb[7] != "" && cb[7] == cb[4]){
+	} else if(cb[7] != "" && cb[7] == cb[4] && cb[1] == ""){
 		winDeny(0);
 		return;
-	} else if(cb[8] != "" && cb[8] == cb[5]){
+	} else if(cb[8] != "" && cb[8] == cb[5] && cb[2] == ""){
 		winDeny(1);
 		return;
-	} else if(cb[9] != "" && cb[9] == cb[6]){
+	} else if(cb[9] != "" && cb[9] == cb[6] && cb[3] == ""){
 		winDeny(2);
+		return;
+	} else if(cb[9] != "" && cb[9] == cb[5] && cb[1] == ""){
+		winDeny(0);
 		return;
 	}
  
-  computerMakeDescision()
+  computerMakeDecision()
  
 }// computer take turn
 
@@ -235,12 +239,12 @@ function winDeny(number){
 	return;
   } else {
     computerMakeDescision();
-  }
+  }//else
   
-}
+}//winDeny
 
 //computer choose a spot to put an O
-function computerMakeDescision() {
+function computerMakeDecision() {
 	let counter = 0;
 	let corner = ["one", "three", "seven", "nine"];
 	
@@ -262,6 +266,6 @@ function computerMakeDescision() {
 	  if (document.getElementById(idName).innerHTML == "") {
 	    document.getElementById(idName).innerHTML = currentPlayer; //enters computer's input
 	    return;
-	  }
+	  }//if
     }while(true)
-}
+}//computerMakeDecision
