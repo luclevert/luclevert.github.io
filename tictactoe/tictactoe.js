@@ -29,8 +29,11 @@ function playerTakeTurn(e){
       
     //if game not over, computer goes
     if(gameStatus == "") {
-      computerTakeTurn();
-      checkGameStatus();
+	  setTimeout(function() {
+          computerTakeTurn();
+          checkGameStatus();
+	    }, 300
+	  );
     }// if
       
   } else {
