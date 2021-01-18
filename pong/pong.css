@@ -31,11 +31,11 @@ body{
 #gameBoard:after {
     content:"";
     position: absolute;
-    z-index: -1;
+    z-index: 1;
     top: 0;
     bottom: 0;
     left: 50%;
-    border-left: 2px dotted #444; /*change these values to suit your liking*/
+    border-left: 3px dotted white; 
 }
 
 #header{
@@ -104,6 +104,7 @@ body{
   height:25px;
   background-color:#F7E3A6;
   border-radius:50%;
+  v-index:2;
 }
 
 /**** Control Panel ****/
@@ -198,4 +199,23 @@ body{
 }
 
 /*** End of Lightbox code ***/
+
+/*** Paddle ability ***/
+.ability{
+	color:#fdffbc;
+	font-size:30px;
+}
+
+#paddleGrow2{
+  position:absolute;
+  right:20px;
+  top:10px;
+}
+
+#paddleGrow1{
+  position:absolute;
+  left:20px;
+  top:10px;
+}
+
 
