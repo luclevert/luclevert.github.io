@@ -252,6 +252,10 @@ function startGame() {
 	positionOfPaddle1 = startPositionOfPaddle1;
 	positionOfPaddle2 = startPositionOfPaddle2;
 	
+	document.getElementById("paddleGrow1").innerHTML = "Q: • • •";
+	document.getElementById("paddleGrow2").innerHTML = "• • • :M";
+	
+	
 	startBall();
 	
 	if(!controlPlay){
