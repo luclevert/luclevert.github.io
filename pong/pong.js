@@ -79,11 +79,11 @@ document.addEventListener('keyup', function(e) {
         document.getElementById("paddle1").style.height = "350px";
 	    paddleHeight1 = document.getElementById("paddle1").offsetHeight;
 		if(growCounter1 == 1){
-	    document.getElementById("paddleGrow1").innerHTML = "• •";
+	    document.getElementById("paddleGrow1").innerHTML = "Q: • •";
 	  } else if (growCounter1 == 2) {
-		document.getElementById("paddleGrow1").innerHTML = "•";
+		document.getElementById("paddleGrow1").innerHTML = "Q: •";
 	  } else if(growCounter1 == 3) {
-		document.getElementById("paddleGrow1").innerHTML = "";
+		document.getElementById("paddleGrow1").innerHTML = "Q: ";
 	  }
 	    setTimeout(function(){
 		  document.getElementById("paddle1").style.height = "150px";
@@ -98,11 +98,11 @@ document.addEventListener('keyup', function(e) {
       document.getElementById("paddle2").style.height = "350px";
 	  paddleHeight2 = document.getElementById("paddle2").offsetHeight;
 	  if(growCounter2 == 1){
-	    document.getElementById("paddleGrow2").innerHTML = "• •";
+	    document.getElementById("paddleGrow2").innerHTML = "• • :M";
 	  } else if (growCounter2 == 2) {
-		document.getElementById("paddleGrow2").innerHTML = "•";
+		document.getElementById("paddleGrow2").innerHTML = "• :M";
 	  } else if(growCounter2 == 3) {
-		document.getElementById("paddleGrow2").innerHTML = "";
+		document.getElementById("paddleGrow2").innerHTML = ":M";
 	  }
 	
 	  setTimeout(function(){
