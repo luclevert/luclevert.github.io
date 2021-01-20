@@ -255,6 +255,9 @@ function startGame() {
 	document.getElementById("paddleGrow1").innerHTML = "Q: • • •";
 	document.getElementById("paddleGrow2").innerHTML = "• • • :M";
 	
+	growCounter1 = 0;
+	growCounter2 = 0;
+	
 	
 	startBall();
 	
