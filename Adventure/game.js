@@ -9,7 +9,7 @@ const levels = [
 
 // level 1
   ["goal", "water","", "", "",
-   "blockside", "water", "", "", "rider",
+   "blockforward", "water", "", "", "rider",
    "animate", "bridge animate", "animate", "animate", "animate",
    "", "water", "", "", "",
    "", "water", "riderup", "", ""],
@@ -20,8 +20,11 @@ const gridBoxes = document.querySelectorAll("#gameBoard div");
 const noPassObstacles = ["blocker1", "obstacle2", "water"];
 
 var currentLevel = 0; //starting level
+var levelNum = 0;
+var levelMap = levels[currentLevel];
 var riderOn = false; //is the rider on?
 var currentLocationOfRider = 0;
+var currentLocationOfEnemy = 0;
 var currentAnimation; //allows 1 animation per level
 var widthOfBoard = 5;
 
@@ -51,7 +54,7 @@ document.addEventListener("keydown", function (e) {
 	  break;
 	case 40: //down
 	  if (currentLocationOfRider + widthOfBoard < widthOfBoard * widthOfBoard) {
-		tryToMove("down");
+		  tryToMove("down");
 	  }
 	break;
   }//switch
@@ -75,18 +78,18 @@ function tryToMove(direction){
   let newClass = "";  // new class to switch to if successful
 	
   switch (direction) {
-	case "left":
-	  nextLocation = currentLocationOfRider - 1;
-	  break;
-	case "right":
-	  nextLocation = currentLocationOfRider + 1;
-	  break;
-	case "up":
-	  nextLocation = currentLocationOfRider - widthOfBoard;
-	  break;
-	case "down":
-	  nextLocation = currentLocationOfRider + widthOfBoard;
-	  break;
+		case "left":
+			nextLocation = currentLocationOfRider - 1;
+			break;
+		case "right":
+			nextLocation = currentLocationOfRider + 1;
+			break;
+		case "up":
+			nextLocation = currentLocationOfRider - widthOfBoard;
+			break;
+		case "down":
+			nextLocation = currentLocationOfRider + widthOfBoard;
+			break;
   } // switch
   
   nextClass = gridBoxes[nextLocation].className;
@@ -124,7 +127,8 @@ function tryToMove(direction){
 			  nextLocation2 = nextLocation + widthOfBoard;
 			}
 		
-	    }
+	  }// if rider is on
+		
 		// show jumping over fence
 		gridBoxes[nextLocation].className = nextClass;
 		
@@ -143,8 +147,10 @@ function tryToMove(direction){
 		  gridBoxes[currentLocationOfRider].className = nextClass2;
 		  
 		  // if next box is a flag, go up a level
-		  nextLevel(nextClass);
-			
+			if (nextClass == "goal" && riderIsOn) {
+				levelNum++;
+		    nextLevel(nextClass);
+			}
 		}, 350);
 		return;
 	  
@@ -177,31 +183,35 @@ function tryToMove(direction){
   
   // if it is an enemy
   if (nextClass.includes("enemy")) {
-	document.getElementById("lose").style.display = "block";
-	return;
+	  loseGame();
   }
-  
+
   // next level
-  nextLevel(nextClass);
+	if (nextClass == "goal" && riderIsOn) {
+		levelNum++;
+		nextLevel(nextClass);
+	}
 	
 } // tryToMove
 
 // move up a level
 function nextLevel(nextClass) {
-  if (nextClass == "goal" && riderIsOn) {
-	document.getElementById("levelup").style.display = "block";  
-	clearTimeout(currentAnimation);
-	setTimeout (function() {
-	  document.getElementById("levelup").style.display = "none";  
-	  currentLevel++;
-	  loadLevel();
-	}, 1000);
-  }
+	if(levelNum != levels.length){
+	  document.getElementById("levelup").style.display = "block";  
+	  clearTimeout(currentAnimation);
+	  setTimeout (function() {
+			document.getElementById("levelup").style.display = "none";  
+			currentLevel++;
+			loadLevel();
+		}, 1000);
+	} else {
+		endGame();
+	}
 }
 
 // load levels 0 - max level
 function loadLevel() {
-  let levelMap = levels[currentLevel];
+	levelMap = levels[currentLevel];
   let animateBoxes;
   riderIsOn = false;
 
@@ -222,6 +232,7 @@ function loadLevel() {
 // index - current location of animation
 // direction - current direction of animation
 function animateEnemy(boxes, index, direction) {
+	console.log("animate enemy location : " + index);
 	
 	// exit function if no animation
 	if (boxes.length <= 0) { return; }
@@ -246,6 +257,12 @@ function animateEnemy(boxes, index, direction) {
 		boxes[i].classList.remove("enemydown");
 	  } // if
 	} // for
+    
+    // if the enemy hits you
+	if (boxes[index].className.includes("rider")) {
+      loseGame();
+			return;
+    }
 	
 	//moving right
 	if (direction == "right") {
@@ -259,24 +276,24 @@ function animateEnemy(boxes, index, direction) {
 		}
 	} else if (direction == "left"){
 	  if (index == 0) {
-		index++;
-		direction = "right";
+			index++;
+			direction = "right";
 	  } else {
-		index--;
+		  index--;
 	  }
 	} else if (direction == "up") {
 	  if(index == 0) {
-	    index += 5;
-		direction = "down";
+	    index += widthOfBoard;
+			direction = "down";
 	  } else {
-		index -= 5;
+		  index -= widthOfBoard;
 	  } 
 	} else if (direction == "down") {
 		if(index == 0){
-		  index -= 5;
+		  index -= widthOfBoard;
 		  direction = "up";
 		} else {
-		  index += 5;
+		  index += widthOfBoard;
 		}  
 	}//else if
 	
@@ -285,3 +302,18 @@ function animateEnemy(boxes, index, direction) {
 	}, 750);
 	  
 }// animate enemy
+
+function endGame(){
+	document.getElementById("endgame").style.display = "block";
+	stopGame();
+}
+
+function loseGame(){
+	document.getElementById("lose").style.display = "block";
+	stopGame();
+}
+
+function stopGame() {
+
+
+}
