@@ -2,17 +2,24 @@ const levels = [
 
   //level 0
   ["goal", "blocker1", "", "", "",
-  "blockforward", "blocker1", "", "", "rider",
+  "blockforwarde", "blocker1", "", "", "rider",
   "", "obstacle2", "animate", "animate", "animate",
   "", "water", "", "", "",
   "", "blockside", "", "riderup", ""],
 
-// level 1
+	// level 1
   ["goal", "water","", "", "",
    "blockforward", "water", "", "", "rider",
    "animate", "bridge animate", "animate", "animate", "animate",
    "", "water", "", "", "",
    "", "water", "riderup", "", ""],
+	 
+	 // level 2
+  ["obstacle2", "obstacle2","goal", "obstacle2", "obstacle2",
+   "animate", "animate", "animate", "animate", "animate",
+   "water", "bridge", "water", "water", "water",
+   "", "", "", "blockforward", "",
+   "rider", "blocker1", "", "", "riderup"],
 
 ];
 
@@ -22,19 +29,18 @@ const noPassObstacles = ["blocker1", "obstacle2", "water"];
 var currentLevel = 0; //starting level
 var levelNum = 0;
 var levelMap = levels[currentLevel];
-var riderOn = false; //is the rider on?
+var riderIsOn = false; //is the rider on?
 var currentLocationOfRider = 0;
-var currentLocationOfEnemy = 0;
 var currentAnimation; //allows 1 animation per level
 var widthOfBoard = 5;
 
 //start game
-window.addEventListener("load", function() {
+window.addEventListener("load", function load() {
   loadLevel();
 });
 
 // move rider
-document.addEventListener("keydown", function (e) {
+document.addEventListener("keydown", function keyDown(e) {
 	
   switch (e.keyCode) {
 	case 37: //left arrow
@@ -99,6 +105,12 @@ function tryToMove(direction){
   
   // if it's a fence, and there is no rider, don't move
   if (!riderIsOn && nextClass.includes("block")) { return; }
+	
+	//if approached at the wrong way (right/left), you don't jump the fence
+	if (nextClass.includes("blockforward") && direction == "left" || nextClass.includes("blockforward") && direction == "right"){ return; }
+	
+	//if approached at the wrong way (up/down), you don't jump the fence
+	if (nextClass.includes("blockside") && direction == "up" || nextClass.includes("blockside") && direction == "down"){ return; }
   
   // if there is a fence, move two spaces with animation
   if (nextClass.includes("block")){
@@ -232,7 +244,6 @@ function loadLevel() {
 // index - current location of animation
 // direction - current direction of animation
 function animateEnemy(boxes, index, direction) {
-	console.log("animate enemy location : " + index);
 	
 	// exit function if no animation
 	if (boxes.length <= 0) { return; }
@@ -261,7 +272,7 @@ function animateEnemy(boxes, index, direction) {
     // if the enemy hits you
 	if (boxes[index].className.includes("rider")) {
       loseGame();
-			return;
+	    return;
     }
 	
 	//moving right
@@ -305,15 +316,10 @@ function animateEnemy(boxes, index, direction) {
 
 function endGame(){
 	document.getElementById("endgame").style.display = "block";
-	stopGame();
+
 }
 
 function loseGame(){
 	document.getElementById("lose").style.display = "block";
-	stopGame();
 }
 
-function stopGame() {
-
-
-}
