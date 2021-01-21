@@ -79,11 +79,11 @@ document.addEventListener('keyup', function(e) {
         document.getElementById("paddle1").style.height = "350px";
 	    paddleHeight1 = document.getElementById("paddle1").offsetHeight;
 		if(growCounter1 == 1){
-	    document.getElementById("paddleGrow1").innerHTML = "Q: • •";
+	    document.getElementById("paddleGrow1").innerHTML = "• •";
 	  } else if (growCounter1 == 2) {
-		document.getElementById("paddleGrow1").innerHTML = "Q: •";
+		document.getElementById("paddleGrow1").innerHTML = "•";
 	  } else if(growCounter1 == 3) {
-		document.getElementById("paddleGrow1").innerHTML = "Q: ";
+		document.getElementById("paddleGrow1").innerHTML = "";
 	  }
 	    setTimeout(function(){
 		  document.getElementById("paddle1").style.height = "150px";
@@ -98,11 +98,11 @@ document.addEventListener('keyup', function(e) {
       document.getElementById("paddle2").style.height = "350px";
 	  paddleHeight2 = document.getElementById("paddle2").offsetHeight;
 	  if(growCounter2 == 1){
-	    document.getElementById("paddleGrow2").innerHTML = "• • :M";
+	    document.getElementById("paddleGrow2").innerHTML = "• •";
 	  } else if (growCounter2 == 2) {
-		document.getElementById("paddleGrow2").innerHTML = "• :M";
+		document.getElementById("paddleGrow2").innerHTML = "•";
 	  } else if(growCounter2 == 3) {
-		document.getElementById("paddleGrow2").innerHTML = ":M";
+		document.getElementById("paddleGrow2").innerHTML = "";
 	  }
 	
 	  setTimeout(function(){
@@ -200,8 +200,6 @@ function show() {
 	  }//else
 	}//if
 		
-
-
 	document.getElementById("paddle1").style.top = positionOfPaddle1 + "px";
 	document.getElementById("paddle2").style.top = positionOfPaddle2 + "px";
 	document.getElementById("ball").style.top = topPositionOfBall + "px";
@@ -252,12 +250,9 @@ function startGame() {
 	positionOfPaddle1 = startPositionOfPaddle1;
 	positionOfPaddle2 = startPositionOfPaddle2;
 	
-	document.getElementById("paddleGrow1").innerHTML = "Q: • • •";
-	document.getElementById("paddleGrow2").innerHTML = "• • • :M";
-	
-	growCounter1 = 0;
-	growCounter2 = 0;
-	
+	document.getElementById("resume").style.pointerEvents = "auto";
+	document.getElementById("pause").style.pointerEvents = "auto";
+	document.getElementById("stop").style.pointerEvents = "auto";
 	
 	startBall();
 	
@@ -281,6 +276,10 @@ function stopGame() {
 	  message1 = "Player 1 has Won with " + score1 + " goals!";
 	  message2 = "Player 2 only had " + score2 + " goals, good try!";
 	}//elseif
+	
+	document.getElementById("resume").style.pointerEvents = "none";
+	document.getElementById("pause").style.pointerEvents = "none";
+	document.getElementById("stop").style.pointerEvents = "none";
 	
 	showLightBox(message1, message2);
 	
