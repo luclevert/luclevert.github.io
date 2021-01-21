@@ -2,7 +2,7 @@ const levels = [
 
   //level 0
   ["goal", "blocker1", "", "", "",
-  "blockforwarde", "blocker1", "", "", "rider",
+  "blockforward", "blocker1", "", "", "rider",
   "", "obstacle2", "animate", "animate", "animate",
   "", "water", "", "", "",
   "", "blockside", "", "riderup", ""],
