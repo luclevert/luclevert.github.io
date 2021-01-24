@@ -33,38 +33,44 @@ var riderIsOn = false; //is the rider on?
 var currentLocationOfRider = 0;
 var currentAnimation; //allows 1 animation per level
 var widthOfBoard = 5;
+var playerLives = 3;
 
 //start game
 window.addEventListener("load", function load() {
   loadLevel();
 });
 
+//let's the rider move
+moveRider();
+
 // move rider
-document.addEventListener("keydown", function keyDown(e) {
-	
-  switch (e.keyCode) {
-	case 37: //left arrow
-	  if(currentLocationOfRider % widthOfBoard !== 0) {
-	    tryToMove("left");
-	  }
-	  break;
-	case 38: //up
-	  if (currentLocationOfRider - widthOfBoard >= 0) {
-	    tryToMove("up");
-	  }
-	  break;
-	case 39: //right
-	  if (currentLocationOfRider % widthOfBoard < widthOfBoard - 1) {
-	    tryToMove("right");
-	  }
-	  break;
-	case 40: //down
-	  if (currentLocationOfRider + widthOfBoard < widthOfBoard * widthOfBoard) {
-		  tryToMove("down");
-	  }
-	break;
-  }//switch
-}); // key event listener
+function moveRider() {
+	document.addEventListener("keydown", keyDown = function keyDown(e) {
+		
+		switch (e.keyCode) {
+		case 37: //left arrow
+			if(currentLocationOfRider % widthOfBoard !== 0) {
+				tryToMove("left");
+			}
+			break;
+		case 38: //up
+			if (currentLocationOfRider - widthOfBoard >= 0) {
+				tryToMove("up");
+			}
+			break;
+		case 39: //right
+			if (currentLocationOfRider % widthOfBoard < widthOfBoard - 1) {
+				tryToMove("right");
+			}
+			break;
+		case 40: //down
+			if (currentLocationOfRider + widthOfBoard < widthOfBoard * widthOfBoard) {
+				tryToMove("down");
+			}
+		break;
+		}//switch
+	}, false); // key event listener
+}//move 
 
 // try to move rider
 function tryToMove(direction){
@@ -143,6 +149,7 @@ function tryToMove(direction){
 		
 		// show jumping over fence
 		gridBoxes[nextLocation].className = nextClass;
+		document.removeEventListener("keydown", keyDown, false);
 		
 		setTimeout(function() {
 		  
@@ -163,6 +170,9 @@ function tryToMove(direction){
 				levelNum++;
 		    nextLevel(nextClass);
 			}
+			
+			//let's the rider move again
+			moveRider();
 		}, 350);
 		return;
 	  
@@ -195,14 +205,14 @@ function tryToMove(direction){
   
   // if it is an enemy
   if (nextClass.includes("enemy")) {
-	  loseGame();
-  }
+	  hitEnemy();
+  } //if
 
   // next level
 	if (nextClass == "goal" && riderIsOn) {
 		levelNum++;
 		nextLevel(nextClass);
-	}
+	} //if
 	
 } // tryToMove
 
@@ -211,9 +221,11 @@ function nextLevel(nextClass) {
 	if(levelNum != levels.length){
 	  document.getElementById("levelup").style.display = "block";  
 	  clearTimeout(currentAnimation);
+		document.removeEventListener("keydown", keyDown, false);
 	  setTimeout (function() {
 			document.getElementById("levelup").style.display = "none";  
 			currentLevel++;
+			moveRider();
 			loadLevel();
 		}, 1000);
 	} else {
@@ -271,8 +283,7 @@ function animateEnemy(boxes, index, direction) {
     
     // if the enemy hits you
 	if (boxes[index].className.includes("rider")) {
-      loseGame();
-	    return;
+      hitEnemy();
     }
 	
 	//moving right
@@ -316,10 +327,33 @@ function animateEnemy(boxes, index, direction) {
 
 function endGame(){
 	document.getElementById("endgame").style.display = "block";
-
+  document.removeEventListener("keydown", keyDown, false);
 }
 
 function loseGame(){
 	document.getElementById("lose").style.display = "block";
+	document.removeEventListener("keydown", keyDown, false);
+}
+
+function hitEnemy(){
+	playerLives--;
+	if(playerLives == 2){
+		document.getElementById("lives").innerHTML = "♥ ♥";
+		return;
+	} else if(playerLives == 1){
+		document.getElementById("lives").innerHTML = "♥";
+		return;
+	} else if(playerLives == 0){
+		document.getElementById("lives").innerHTML = "";
+		loseGame();
+		return;
+	}
+	return;
+}
+
+function moveAway(){
+	if (direction == "up") {
+		
+	}
 }
 

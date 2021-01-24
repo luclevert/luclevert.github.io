@@ -17,96 +17,106 @@ body {
 }
 
 #gameBoard div{
+	/*background-image:url("images/grass.png");*/
 	background-color:#00ee00;
 	background-repeat:no-repeat;
 	background-size:cover;
 }
 
+#lives{
+	text-align:center;
+	color:white;
+}
+
 .rider {
-	background-image:url("images/rider.png");
+	background:url("images/rider.png"), url("images/grass.png");
 }
 
 .blocker1 {
-	background-image:url("images/blocker1.png");
+	background-image:url("images/blocker1.png"), url("images/grass.png");
 }
 
 .obstacle2 {
-	background-image:url("images/Obstacle2.png");
+	background-image:url("images/Obstacle2.png"), url("images/grass.png");
 }
 
 .goal{
-	background-image:url("images/goal.png");
+	background-image:url("images/goal.png"), url("images/grass.png");
 }
 
 .blockforward{
-  background-image:url("images/blockforward.png");
+  background-image:url("images/blockforward.png"), url("images/grass.png");
 }
 
 .blockside{
-	background-image:url("images/blockside.png");
+	background-image:url("images/blockside.png"), url("images/grass.png");
 }
 
 .water{
-	background-image:url("images/water.jpg");
+	background-image:url("images/water.jpg"), url("images/grass.png");
 }
 
 .riderleft {
-	background-image:url("images/riderleft.png");
+	background-image:url("images/riderleft.png"), url("images/grass.png");
 }
 .riderright {
-	background-image:url("images/riderright.png");
+	background-image:url("images/riderright.png"), url("images/grass.png");
 }
 .riderup {
-	background-image:url("images/riderup.png");
+	background-image:url("images/riderup.png"), url("images/grass.png");
 }
 .riderdown {
-	background-image:url("images/riderdown.png");
+	background-image:url("images/riderdown.png"), url("images/grass.png");
 }
 
 .rideronleft {
-	background-image:url("images/rideronleft.png");
+	background-image:url("images/rideronleft.png"), url("images/grass.png");
 }
 .rideronright {
-	background-image:url("images/rideronright.png");
+	background-image:url("images/rideronright.png"), url("images/grass.png");
 }
 .rideronup {
-	background-image:url("images/rideronup.png");
+	background-image:url("images/rideronup.png"), url("images/grass.png");
 }
 .riderondown {
-	background-image:url("images/riderondown.png");
+	background-image:url("images/riderondown.png"), url("images/grass.png");
 }
 
 .riderjumpleft {
-	background-image:url("images/riderjumpleft.png");
+	background-image:url("images/riderjumpleft.png"), url("images/grass.png");
 }
 .riderjumpright {
-	background-image:url("images/riderjumpright.png");
+	background-image:url("images/riderjumpright.png"), url("images/grass.png");
 }
 .riderjumpup {
-	background-image:url("images/riderjumpup.png");
+	background-image:url("images/riderjumpup.png"), url("images/grass.png");
 }
 .riderjumpdown {
-	background-image:url("images/riderjumpdown.png");
+	background-image:url("images/riderjumpdown.png"), url("images/grass.png");
 }
 
 .enemydown {
-	background-image:url("images/enemydown.png");
+	background-image:url("images/enemydown.png"), url("images/grass.png");
 }
 
 .enemyup {
-	background-image:url("images/enemyup.png");
+	background-image:url("images/enemyup.png"), url("images/grass.png");
 }
 
 .enemyright {
-	background-image:url("images/enemyright.png");
+	background-image:url("images/enemyright.png"), url("images/grass.png");
 }
 
 .enemyleft {
-	background-image:url("images/enemyleft.png");
+	background-image:url("images/enemyleft.png"), url("images/grass.png");
 }
 
 .bridge {
 	background-color:#800020 !important;
+}
+
+.grass {
+	background-image:url("images/grass.png");
 }
 
 .message{
