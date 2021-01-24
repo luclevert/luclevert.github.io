@@ -171,9 +171,10 @@ function tryToMove(direction){
 		    nextLevel(nextClass);
 			}
 			
-			//let's the rider move again
-			moveRider();
 		}, 350);
+	  
+	  	//let's the rider move again
+		moveRider();
 		return;
 	  
   } // if includes block
