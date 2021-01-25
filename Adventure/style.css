@@ -32,7 +32,7 @@ body {
 }
 
 .rider {
-	background-image:url("images/rider.png"), url("images/grass.png");
+	background-image:url("images/bike.png"), url("images/grass.png");
 }
 
 .blocker1 {
@@ -60,29 +60,29 @@ body {
 }
 
 .riderleft {
-	background-image:url("images/riderleft.png"), url("images/grass.png");
+	background-image:url("images/boyleft.png"), url("images/grass.png");
 }
 .riderright {
-	background-image:url("images/riderright.png"), url("images/grass.png");
+	background-image:url("images/boyright.png"), url("images/grass.png");
 }
 .riderup {
-	background-image:url("images/riderup.png"), url("images/grass.png");
+	background-image:url("images/boyup.png"), url("images/grass.png");
 }
 .riderdown {
-	background-image:url("images/riderdown.png"), url("images/grass.png");
+	background-image:url("images/boydown.png"), url("images/grass.png");
 }
 
 .rideronleft {
-	background-image:url("images/rideronleft.png"), url("images/grass.png");
+	background-image:url("images/riderleft.png"), url("images/grass.png");
 }
 .rideronright {
-	background-image:url("images/rideronright.png"), url("images/grass.png");
+	background-image:url("images/riderright.png"), url("images/grass.png");
 }
 .rideronup {
-	background-image:url("images/rideronup.png"), url("images/grass.png");
+	background-image:url("images/riderup.png"), url("images/grass.png");
 }
 .riderondown {
-	background-image:url("images/riderondown.png"), url("images/grass.png");
+	background-image:url("images/riderdown.png"), url("images/grass.png");
 }
 
 .riderjumpleft {
