@@ -34,12 +34,66 @@ var currentLocationOfRider = 0;
 var currentAnimation; //allows 1 animation per level
 var widthOfBoard = 5;
 var playerLives = 3;
+var controlAnimation = true;
 
 //start game
-window.addEventListener("load", function load() {
-  loadLevel();
-});
+function startGame(){
+	
+	document.getElementById("startGame").style.display = "none";
+	document.getElementById("start").style.display = "none";
+	document.getElementById("info").style.display = "none";
+	
+}
 
+function restartGame() {
+	
+	document.getElementById("endgame").style.display = "none";
+	document.getElementById("restart").style.display = "none";
+	document.getElementById("lives").innerHTML = "♥ ♥ ♥";
+	
+	currentLevel = 0;
+	levelNum = 0;
+	levelMap = levels[currentLevel];
+	riderIsOn = false; 
+	currentAnimation; 
+	widthOfBoard = 5;
+	playerLives = 3;
+	controlAnimation = true;
+	
+	moveRider();
+	loadLevel();
+}
+
+function showInfo(){
+	document.getElementById("infoScreen").style.display = "block";
+	document.getElementById("return").style.display = "block";
+	document.getElementById("start").style.display = "none";
+	document.getElementById("info").style.display = "none";
+}
+
+function showStartScreen(){
+	document.getElementById("endgame").style.display = "none";
+	document.getElementById("infoScreen").style.display = "none";
+	document.getElementById("return").style.display = "none";
+	document.getElementById("startGame").style.display = "block";
+	document.getElementById("start").style.display = "block";
+	document.getElementById("info").style.display = "block";
+}
+
+function reloadLevel(){
+	document.getElementById("lose").style.display = "none";
+	document.getElementById("retry").style.display = "none";
+	document.getElementById("lives").innerHTML = "♥ ♥ ♥";
+	playerLives = 3;
+	controlAnimation = true;
+	moveRider();
+	loadLevel();
+}
+
+window.addEventListener("load", function load() {
+	loadLevel();
+});
+	
 //let's the rider move
 moveRider();
 
@@ -171,9 +225,8 @@ function tryToMove(direction){
 		    nextLevel(nextClass);
 			}
 			
+			//let's the rider move again
 		}, 350);
-	  
-	  	//let's the rider move again
 		moveRider();
 		return;
 	  
@@ -258,103 +311,106 @@ function loadLevel() {
 // direction - current direction of animation
 function animateEnemy(boxes, index, direction) {
 	
-	// exit function if no animation
-	if (boxes.length <= 0) { return; }
-	
-	// update images
-	if (direction == "right"){
-	  boxes[index].classList.add("enemyright");
-	} else if (direction == "left"){
-	  boxes[index].classList.add("enemyleft");
-	} else if (direction == "up"){
-	  boxes[index].classList.add("enemyup");
-	} else if (direction == "down"){
-	  boxes[index].classList.add("enemydown");
-	}
-	
-	//remove images from other boxes
-	for(var i = 0; i < boxes.length; i++){
-	  if(i != index){
-		boxes[i].classList.remove("enemyleft");
-		boxes[i].classList.remove("enemyright");
-		boxes[i].classList.remove("enemyup");
-		boxes[i].classList.remove("enemydown");
-	  } // if
-	} // for
-    
-    // if the enemy hits you
-	if (boxes[index].className.includes("rider")) {
-      hitEnemy();
-    }
-	
-	//moving right
-	if (direction == "right") {
+	if(controlAnimation == true){
 		
-		// turn around if hit right side
-		if (index == boxes.length - 1) {
-		  index--;
-		  direction = "left";
-		} else {
-		  index++;
+		// exit function if no animation
+		if (boxes.length <= 0) { return; }
+		
+		// update images
+		if (direction == "right"){
+			boxes[index].classList.add("enemyright");
+		} else if (direction == "left"){
+			boxes[index].classList.add("enemyleft");
+		} else if (direction == "up"){
+			boxes[index].classList.add("enemyup");
+		} else if (direction == "down"){
+			boxes[index].classList.add("enemydown");
 		}
-	} else if (direction == "left"){
-	  if (index == 0) {
-			index++;
-			direction = "right";
-	  } else {
-		  index--;
-	  }
-	} else if (direction == "up") {
-	  if(index == 0) {
-	    index += widthOfBoard;
-			direction = "down";
-	  } else {
-		  index -= widthOfBoard;
-	  } 
-	} else if (direction == "down") {
-		if(index == 0){
-		  index -= widthOfBoard;
-		  direction = "up";
-		} else {
-		  index += widthOfBoard;
-		}  
-	}//else if
-	
-	currentAnimation = setTimeout(function() {
-	  animateEnemy(boxes, index, direction);
-	}, 750);
+		
+		//remove images from other boxes
+		for(var i = 0; i < boxes.length; i++){
+			if(i != index){
+			boxes[i].classList.remove("enemyleft");
+			boxes[i].classList.remove("enemyright");
+			boxes[i].classList.remove("enemyup");
+			boxes[i].classList.remove("enemydown");
+			} // if
+		} // for
+			
+			// if the enemy hits you
+		if (boxes[index].className.includes("rider")) {
+				hitEnemy();
+			}
+		
+		//moving right
+		if (direction == "right") {
+			
+			// turn around if hit right side
+			if (index == boxes.length - 1) {
+				index--;
+				direction = "left";
+			} else {
+				index++;
+			}
+		} else if (direction == "left"){
+			if (index == 0) {
+				index++;
+				direction = "right";
+			} else {
+				index--;
+			}
+		} else if (direction == "up") {
+			if(index == 0) {
+				index += widthOfBoard;
+				direction = "down";
+			} else {
+				index -= widthOfBoard;
+			} 
+		} else if (direction == "down") {
+			if(index == 0){
+				index -= widthOfBoard;
+				direction = "up";
+			} else {
+				index += widthOfBoard;
+			}  
+		}//else if
+		
+		currentAnimation = setTimeout(function() {
+			animateEnemy(boxes, index, direction);
+		}, 750);
+	}
+	return;
 	  
 }// animate enemy
 
 function endGame(){
 	document.getElementById("endgame").style.display = "block";
+	document.getElementById("restart").style.display = "block";
+	controlAnimation = false;
   document.removeEventListener("keydown", keyDown, false);
 }
 
 function loseGame(){
 	document.getElementById("lose").style.display = "block";
+	document.getElementById("retry").style.display = "block";
+	controlAnimation = false;
 	document.removeEventListener("keydown", keyDown, false);
 }
 
 function hitEnemy(){
 	playerLives--;
 	if(playerLives == 2){
-		document.getElementById("lives").innerHTML = "♥ ♥";
+		document.getElementById("lives").innerHTML = "♥ ♥ ○";
 		return;
 	} else if(playerLives == 1){
-		document.getElementById("lives").innerHTML = "♥";
+		document.getElementById("lives").innerHTML = "♥ ○ ○";
 		return;
 	} else if(playerLives == 0){
-		document.getElementById("lives").innerHTML = "";
+		document.getElementById("lives").innerHTML = "○ ○ ○";
 		loseGame();
 		return;
 	}
 	return;
 }
 
-function moveAway(){
-	if (direction == "up") {
-		
-	}
-}
 

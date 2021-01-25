@@ -6,10 +6,10 @@
     
     <!-- include an external style sheet -->
     <link rel="stylesheet" href="style.css">  
-    <h1 id="lives">♥ ♥ ♥</h1>
   </head>
   
   <body>
+	<h1 id="lives">♥ ♥ ♥</h1>
 	  <div id="gameBoard">
 		  <div></div>
 			<div></div>
@@ -41,10 +41,53 @@
 			<div></div>
 			<div></div>
 		</div>
+
+
+    <div class="screen" id="startGame">
+		<h1 id="message1">Welcome to</h1>
+		<h2 id="message2">Albert and Simon's Adventure!</h2>
+		</div>
+		
+		<div id="infoScreen">
+			<h1 id="titleText">Instructions</h1>
+			<p>
+			Move around the the board using the arrow keys.
+			<br><br>
+			Be sure to avoid the monsters that roam the board.
+			<br><br>
+			You can only jump over the fences while on your bike.
+			<br><br>
+			You want to get to Simon the cat to go on to the next level.
+			</p>
+			<h2>Story</h2>
+			<p>
+			You rode your bike out of town and got lost.
+			<br><br>
+			The embodiments of your fears roam the fields.
+			<br><br>
+			You have to get home before sundown.
+			<br><br>
+			Or you may never see your home again.
+			</p>
+			
+			<div onclick="showStartScreen()" class="controls" id="return">Return</div>
+		</div>
+		
+		<div class="screen" id="endgame">
+			<h1 id="message1">Congratulations!</h1>
+			<h2 id="message2">Albert and Simon successfully <br>made it home safely!</h2>
+			<p id="thanks">Thank you for playing this very short game!</p>
+			<p id="question">Click Restart to restart the game from level 1.</p>
+			<div onclick="restartGame()" class="controls" id="restart">Restart</div>
+		</div>
 		
 		<div class="message" id="lose">You Lose</div>
 		<div class="message" id="levelup">Next Level...</div>
-		<div class="message" id="endgame">Game Over!</div>
+	
+		<div onclick="startGame()" class="controls" id="start">Start</div>
+		<div onclick="showInfo()" class="controls" id="info">Info</div>
+		<div onclick="reloadLevel()" class="controls" id="retry">Retry</div>
+		
 	
 	<!-- include an external JavaScript file -->
     <script src="game.js"></script>
