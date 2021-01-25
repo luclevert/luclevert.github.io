@@ -14,12 +14,26 @@ const levels = [
    "", "water", "", "", "",
    "", "water", "riderup", "", ""],
 	 
-	 // level 2
+	// level 2
   ["obstacle2", "obstacle2","goal", "obstacle2", "obstacle2",
    "animate", "animate", "animate", "animate", "animate",
    "water", "bridge", "water", "water", "water",
-   "", "", "", "blockforward", "",
+   "", "", "", "blockside", "",
    "rider", "blocker1", "", "", "riderup"],
+	 
+	// level 3
+  ["obstacle2", "rider","blocker1", "water", "",
+   "blocker1", "animate", "obstacle2", "water", "",
+   "goal", "animate", "", "bridge", "",
+   "blocker1", "animate", "blocker1", "water", "",
+   "blocker1", "animate", "obstacle2", "water", "riderup"],
+	 
+	 // level 4
+  ["", "","", "", "",
+   "", "", "", "", "",
+   "", "", "", "", "",
+   "", "", "", "", "",
+   "", "", "", "", ""],
 
 ];
 
@@ -36,59 +50,69 @@ var widthOfBoard = 5;
 var playerLives = 3;
 var controlAnimation = true;
 
+var currentBox;
+var currentDirection;
+var currentIndex;
+
 //start game
 function startGame(){
-	
 	document.getElementById("startGame").style.display = "none";
 	document.getElementById("start").style.display = "none";
 	document.getElementById("info").style.display = "none";
-	
+	document.getElementById("pause").style.display = "block";
 }
 
+//restarts the game from level 1
 function restartGame() {
 	
 	document.getElementById("endgame").style.display = "none";
 	document.getElementById("restart").style.display = "none";
+	document.getElementById("pause").style.display = "block";
 	document.getElementById("lives").innerHTML = "♥ ♥ ♥";
 	
 	currentLevel = 0;
 	levelNum = 0;
 	levelMap = levels[currentLevel];
 	riderIsOn = false; 
-	currentAnimation; 
+	currentAnimation = false; 
 	widthOfBoard = 5;
 	playerLives = 3;
+	currentAnimation = null;
 	controlAnimation = true;
 	
 	moveRider();
 	loadLevel();
-}
+} //restartGame
 
+//shows info screen
 function showInfo(){
 	document.getElementById("infoScreen").style.display = "block";
 	document.getElementById("return").style.display = "block";
 	document.getElementById("start").style.display = "none";
 	document.getElementById("info").style.display = "none";
-}
+} //showInfo
 
+//shows start screen
 function showStartScreen(){
-	document.getElementById("endgame").style.display = "none";
 	document.getElementById("infoScreen").style.display = "none";
 	document.getElementById("return").style.display = "none";
 	document.getElementById("startGame").style.display = "block";
 	document.getElementById("start").style.display = "block";
 	document.getElementById("info").style.display = "block";
-}
+} // showStartScreen
 
+//reloads a level
 function reloadLevel(){
 	document.getElementById("lose").style.display = "none";
 	document.getElementById("retry").style.display = "none";
-	document.getElementById("lives").innerHTML = "♥ ♥ ♥";
-	playerLives = 3;
+	document.getElementById("pause").style.display = "block";
+	document.getElementById("lives").innerHTML = "♥ ○ ○";
+	playerLives = 1;
 	controlAnimation = true;
 	moveRider();
 	loadLevel();
-}
+} // reloadLevel
+
 
 window.addEventListener("load", function load() {
 	loadLevel();
@@ -201,10 +225,10 @@ function tryToMove(direction){
 		
 	  }// if rider is on
 		
-		// show jumping over fence
-		gridBoxes[nextLocation].className = nextClass;
 		document.removeEventListener("keydown", keyDown, false);
 		
+		// show jumping over fence
+		gridBoxes[nextLocation].className = nextClass;
 		setTimeout(function() {
 		  
 		  // set jump back to just a fence
@@ -223,13 +247,11 @@ function tryToMove(direction){
 			if (nextClass == "goal" && riderIsOn) {
 				levelNum++;
 		    nextLevel(nextClass);
-			}
-			
-			//let's the rider move again
+			} else {
+				moveRider();
+			} // else
 		}, 350);
-		moveRider();
 		return;
-	  
   } // if includes block
   
   // if there is a rider, add rider
@@ -274,10 +296,12 @@ function tryToMove(direction){
 function nextLevel(nextClass) {
 	if(levelNum != levels.length){
 	  document.getElementById("levelup").style.display = "block";  
+		document.getElementById("pause").style.display = "none"; 
 	  clearTimeout(currentAnimation);
 		document.removeEventListener("keydown", keyDown, false);
 	  setTimeout (function() {
 			document.getElementById("levelup").style.display = "none";  
+			document.getElementById("pause").style.display = "block"; 
 			currentLevel++;
 			moveRider();
 			loadLevel();
@@ -292,6 +316,7 @@ function loadLevel() {
 	levelMap = levels[currentLevel];
   let animateBoxes;
   riderIsOn = false;
+	let direction;
 
   // load board
   for (var i = 0; i < gridBoxes.length; i++){
@@ -310,6 +335,7 @@ function loadLevel() {
 // index - current location of animation
 // direction - current direction of animation
 function animateEnemy(boxes, index, direction) {
+	currentAnimation = false;
 	
 	if(controlAnimation == true){
 		
@@ -338,7 +364,7 @@ function animateEnemy(boxes, index, direction) {
 		} // for
 			
 			// if the enemy hits you
-		if (boxes[index].className.includes("rider")) {
+			if (boxes[index].className.includes("rider")) {
 				hitEnemy();
 			}
 		
@@ -359,7 +385,10 @@ function animateEnemy(boxes, index, direction) {
 			} else {
 				index--;
 			}
-		} else if (direction == "up") {
+		} //else
+		
+		//change direction if hit top
+		if (index == boxes.length + widthOfBoard) {
 			if(index == 0) {
 				index += widthOfBoard;
 				direction = "down";
@@ -375,17 +404,23 @@ function animateEnemy(boxes, index, direction) {
 			}  
 		}//else if
 		
+		currentBox = boxes;
+		currentDirection = direction;
+		currentIndex = index;
+		
 		currentAnimation = setTimeout(function() {
 			animateEnemy(boxes, index, direction);
 		}, 750);
-	}
-	return;
-	  
+	} else {
+		return;
+	}//else
 }// animate enemy
 
+//shows end screen and stops the game
 function endGame(){
 	document.getElementById("endgame").style.display = "block";
 	document.getElementById("restart").style.display = "block";
+	document.getElementById("pause").style.display = "none";
 	controlAnimation = false;
   document.removeEventListener("keydown", keyDown, false);
 }
@@ -393,6 +428,7 @@ function endGame(){
 function loseGame(){
 	document.getElementById("lose").style.display = "block";
 	document.getElementById("retry").style.display = "block";
+	document.getElementById("pause").style.display = "none";
 	controlAnimation = false;
 	document.removeEventListener("keydown", keyDown, false);
 }
@@ -413,4 +449,22 @@ function hitEnemy(){
 	return;
 }
 
+function pauseGame(){
+	document.getElementById("pause").style.display = "none";
+	document.getElementById("pauseScreen").style.display = "block";
+	document.getElementById("resume").style.display = "block";
+	controlAnimation = false;
+	document.removeEventListener("keydown", keyDown, false);
+}
 
+function resumeGame(){
+	document.getElementById("pause").style.display = "block";
+	document.getElementById("pauseScreen").style.display = "none";
+	document.getElementById("resume").style.display = "none";
+	controlAnimation = true;
+	console.log(currentBox);
+	console.log(currentDirection);
+	console.log(currentIndex);
+	animateEnemy(currentBox, currentIndex, currentDirection);
+	moveRider();
+}

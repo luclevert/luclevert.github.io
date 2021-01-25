@@ -10,6 +10,40 @@
   
   <body>
 	<h1 id="lives">♥ ♥ ♥</h1>
+	
+	<div id="container">
+	<div id="gameBoardBackground">
+		  <div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+		</div>
+		
 	  <div id="gameBoard">
 		  <div></div>
 			<div></div>
@@ -41,11 +75,10 @@
 			<div></div>
 			<div></div>
 		</div>
-
-
+</div> <!-- container-->
     <div class="screen" id="startGame">
-		<h1 id="message1">Welcome to</h1>
-		<h2 id="message2">Albert and Simon's Adventure!</h2>
+			<h1 class="message1">Welcome to</h1>
+			<h2 class="message2">Albert and Simon's Adventure!</h2>
 		</div>
 		
 		<div id="infoScreen">
@@ -63,7 +96,7 @@
 			<p>
 			You rode your bike out of town and got lost.
 			<br><br>
-			The embodiments of your fears roam the fields.
+			Spooky mosters roam the fields far from home.
 			<br><br>
 			You have to get home before sundown.
 			<br><br>
@@ -74,22 +107,25 @@
 		</div>
 		
 		<div class="screen" id="endgame">
-			<h1 id="message1">Congratulations!</h1>
-			<h2 id="message2">Albert and Simon successfully <br>made it home safely!</h2>
-			<p id="thanks">Thank you for playing this very short game!</p>
-			<p id="question">Click Restart to restart the game from level 1.</p>
+			<h1 class="message1">Congratulations!</h1>
+			<h2 class="message2">Albert and Simon successfully <br>made it home safely!</h2>
+			<div id="thanks">Thank you for playing this very short game!</div>
+			<div id="question">Click Restart to restart the game from level 1.</div>
 			<div onclick="restartGame()" class="controls" id="restart">Restart</div>
 		</div>
 		
 		<div class="message" id="lose">You Lose</div>
 		<div class="message" id="levelup">Next Level...</div>
+		<div class="message" id="pauseScreen">Paused</div>
 	
 		<div onclick="startGame()" class="controls" id="start">Start</div>
 		<div onclick="showInfo()" class="controls" id="info">Info</div>
 		<div onclick="reloadLevel()" class="controls" id="retry">Retry</div>
+		<div onclick="pauseGame()" class="controls" id="pause">Pause</div>
+		<div onclick="resumeGame()" class="controls" id="resume">Resume</div>
 		
 	
-	<!-- include an external JavaScript file -->
+		<!-- include an external JavaScript file -->
     <script src="game.js"></script>
   </body>
   

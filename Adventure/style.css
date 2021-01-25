@@ -4,24 +4,47 @@ body {
  background-color:black;
  font-family: 'Press Start 2P', cursive;
 }
+#container {
+  position:relative;
+	top:10px;
+	width:600px;
+	height:600px;
+	margin-left:auto;
+	margin-right:auto;
+}
 
 #gameBoard {
-  border: 1px solid black;
+	position:absolute;
+	top:0px;
+	left:0px;
   display: grid;
   grid-template-columns: 120px 120px 120px 120px 120px;
 	grid-template-rows: 120px 120px 120px 120px 120px;
 	justify-content: center;
 	width:600px;
 	height:600px;
-	
-	margin-left:auto;
-	margin-right:auto;
-	
-}
+	}
 
 #gameBoard div{
-	/*background-image:url("images/grass.png");*/
-	background-color:#00ee00;
+	background-repeat:no-repeat;
+	background-size:cover;
+}
+
+#gameBoardBackground {
+  position:absolute;
+	top:0px;
+	left:0px;
+  display: grid;
+  grid-template-columns: 120px 120px 120px 120px 120px;
+	grid-template-rows: 120px 120px 120px 120px 120px;
+	justify-content: center;
+	width:600px;
+	height:600px;
+
+}
+
+#gameBoardBackground div{
+	background-image:url("images/grass.png");
 	background-repeat:no-repeat;
 	background-size:cover;
 }
@@ -32,94 +55,89 @@ body {
 }
 
 .rider {
-	background-image:url("images/bike.png"), url("images/grass.png");
+	background-image:url("images/bike.png");
 }
 
 .blocker1 {
-	background-image:url("images/blocker1.png"), url("images/grass.png");
+	background-image:url("images/blocker1.png");
 }
 
 .obstacle2 {
-	background-image:url("images/Obstacle2.png"), url("images/grass.png");
+	background-image:url("images/Obstacle2.png");
 }
 
 .goal{
-	background-image:url("images/goal.png"), url("images/grass.png");
+	background-image:url("images/goal.png");
 }
 
 .blockforward{
-  background-image:url("images/blockforward.png"), url("images/grass.png");
+  background-image:url("images/blockforward.png");
 }
 
 .blockside{
-	background-image:url("images/blockside.png"), url("images/grass.png");
+	background-image:url("images/blockside.png");
 }
 
 .water{
-	background-image:url("images/water.jpg"), url("images/grass.png");
+	background-image:url("images/water.jpg");
 }
 
 .riderleft {
-	background-image:url("images/boyleft.png"), url("images/grass.png");
+	background-image:url("images/boyleft.png");
 }
 .riderright {
-	background-image:url("images/boyright.png"), url("images/grass.png");
+	background-image:url("images/boyright.png");
 }
 .riderup {
-	background-image:url("images/boyup.png"), url("images/grass.png");
+	background-image:url("images/boyup.png");
 }
 .riderdown {
-	background-image:url("images/boydown.png"), url("images/grass.png");
+	background-image:url("images/boydown.png");
 }
 
 .rideronleft {
-	background-image:url("images/riderleft.png"), url("images/grass.png");
+	background-image:url("images/riderleft.png");
 }
 .rideronright {
-	background-image:url("images/riderright.png"), url("images/grass.png");
+	background-image:url("images/riderright.png");
 }
 .rideronup {
-	background-image:url("images/riderup.png"), url("images/grass.png");
+	background-image:url("images/riderup.png");
 }
 .riderondown {
-	background-image:url("images/riderdown.png"), url("images/grass.png");
+	background-image:url("images/riderdown.png");
 }
-
 .riderjumpleft {
-	background-image:url("images/riderjumpleft.png"), url("images/grass.png");
+	background-image:url("images/riderjumpleft.png");
 }
 .riderjumpright {
-	background-image:url("images/riderjumpright.png"), url("images/grass.png");
+	background-image:url("images/riderjumpright.png");
 }
 .riderjumpup {
-	background-image:url("images/riderjumpup.png"), url("images/grass.png");
+	background-image:url("images/riderjumpup.png");
 }
 .riderjumpdown {
-	background-image:url("images/riderjumpdown.png"), url("images/grass.png");
+	background-image:url("images/riderjumpdown.png");
 }
 
 .enemydown {
-	background-image:url("images/enemydown.png"), url("images/grass.png");
+	background-image:url("images/enemydown.png");
 }
 
 .enemyup {
-	background-image:url("images/enemyup.png"), url("images/grass.png");
+	background-image:url("images/enemyup.png");
 }
 
 .enemyright {
-	background-image:url("images/enemyright.png"), url("images/grass.png");
+	background-image:url("images/enemyright.png");
 }
 
 .enemyleft {
-	background-image:url("images/enemyleft.png"), url("images/grass.png");
+	background-image:url("images/enemyleft.png");
 }
 
 .bridge {
 	background-color:#800020 !important;
-}
-
-.grass {
-	background-image:url("images/grass.png");
 }
 
 .message{
@@ -150,75 +168,9 @@ body {
   text-align:center;
 }
 
-.button{
-	display:block;
-	position:absolute;
-	z-index: 2;
-  padding:15px;
-  width:160px;
-  height:20px;
-  background-color:#ffe5b9;
-  color:#132743;
-  vertical-align:top;
-  text-align:center;
-  line-height:20px;
-  font-size:1em;
-  border-radius:7px;
-  padding-left:20px;
-  padding-right:20px;
-  letter-spacing:2px;
-}
-
-
-#start{
-	left:55%;
-}
-
-#info{
-	left:30%;
-}
-
-#return{
-	left:42%;
-	top:750px;
-}
-
-#retry{
-	display:none;
-	left:42%;
-	top:720px;
-}
-
-#restart{
-	left:42%;
-	top:720px;
-}
-
-.controls:hover{
-	background-color: white;
-	letter-spacing:5px;
-	color: black;
-	transition: 0.4s;
-}
-
-
-#message1{
-	top:75px;
-	font-size:75px;
-}
-
-#message2{
-	top:175px;
-	font-size: 45px;
-}
-
-#question{
-	top:700px;
-}
-
 .controls{
 	display:block;
-	position:absolute;
+	position: fixed;
 	z-index: 2;
   padding:15px;
   width:160px;
@@ -234,6 +186,65 @@ body {
   padding-right:20px;
   letter-spacing:2px;
 } 
+
+.controls:hover{
+	background-color: white;
+	letter-spacing:5px;
+	color: black;
+	transition: 0.4s;
+}
+
+#start{
+	bottom:115px;
+	left:55%;
+}
+
+#info{
+	bottom:115px;
+	left:30%;
+}
+
+#return{
+	left:43%;
+	bottom:115px;
+}
+
+#retry{
+	display:none;
+	left:42%;
+	bottom:115px;
+}
+
+#restart{
+	left:42%;
+	bottom:115px;
+}
+
+#pause{
+	display:none;
+	left:42%;
+	bottom:115px;
+}
+
+#resume{
+	display:none;
+	left:42%;
+	bottom:115px;
+}
+
+.message1{
+	top:75px;
+	font-size:75px;
+}
+
+.message2{
+	top:175px;
+	font-size: 45px;
+}
+
+#question{
+	bottom:220px;
+}
 
 #infoScreen{
 	display:none;
