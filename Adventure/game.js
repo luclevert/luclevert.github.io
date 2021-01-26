@@ -328,7 +328,7 @@ function loadLevel() {
   for (var i = 0; i < gridBoxes.length; i++){
     gridBoxes[i].className = levelMap[i];
     if(levelMap[i].includes("riderup")) currentLocationOfRider = i;
-		if(levelMap[i].includes("bridge")){currentLocationOfBridge = i;
+		if(levelMap[i].includes("bridge"))currentLocationOfBridge = i;
   } // for
   
   animateBoxes = document.querySelectorAll(".animate");
