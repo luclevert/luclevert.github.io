@@ -1,43 +1,44 @@
 const levels = [
 
   //level 0
-  ["goal", "blocker1", "", "", "",
+  ["goal", "blocker1", "", "apple", "obstacle2",
   "blockforward", "blocker1", "", "", "rider",
   "", "obstacle2", "animate", "animate", "animate",
-  "", "water", "", "", "",
+  "", "water", "", "", "obstacle2",
   "", "blockside", "", "riderup", ""],
 
 	// level 1
-  ["goal", "water","", "", "",
-   "blockforward", "water", "", "", "rider",
-   "animate", "bridge animate", "animate", "animate", "animate",
-   "", "water", "", "", "",
+  ["goal", "water","apple", "", "obstacle2",
+   "blockforward", "water", "blocker1", "", "rider",
+   "animate", "bridgeright animate", "animate", "animate", "animate",
+   "", "water", "obstacle2", "", "obstacle2",
    "", "water", "riderup", "", ""],
 	 
 	// level 2
   ["obstacle2", "obstacle2","goal", "obstacle2", "obstacle2",
    "animate", "animate", "animate", "animate", "animate",
-   "water", "bridge", "water", "water", "water",
+   "water", "bridgeup", "water", "water", "water",
    "", "", "", "blockside", "",
    "rider", "blocker1", "", "", "riderup"],
 	 
 	// level 3
   ["obstacle2", "rider","blocker1", "water", "",
    "blocker1", "animate", "obstacle2", "water", "",
-   "goal", "animate", "", "bridge", "",
+   "goal", "animate", "", "bridgeright", "apple",
    "blocker1", "animate", "blocker1", "water", "",
    "blocker1", "animate", "obstacle2", "water", "riderup"],
 	 
 	 // level 4
-  ["", "","", "", "",
-   "", "", "", "", "",
-   "", "", "", "", "",
-   "", "", "", "", "",
-   "", "", "", "", ""],
+  ["obstacle2", "goal","obstacle2", "blocker1", "obstacle2",
+   "blocker1", "", "blockside", "", "blocker1",
+   "water", "water", "water", "bridgeup", "water",
+   "animate", "animate", "animate", "animate", "animate",
+   "blocker1", "riderup", "", "obstacle2", "rider"],
 
 ];
 
 const gridBoxes = document.querySelectorAll("#gameBoard div");
+const gridBoxesBackground = document.querySelectorAll("#gameBoardBackground div");
 const noPassObstacles = ["blocker1", "obstacle2", "water"];
 
 var currentLevel = 0; //starting level
@@ -45,6 +46,7 @@ var levelNum = 0;
 var levelMap = levels[currentLevel];
 var riderIsOn = false; //is the rider on?
 var currentLocationOfRider = 0;
+var currentLocationOfBridge = 0;
 var currentAnimation; //allows 1 animation per level
 var widthOfBoard = 5;
 var playerLives = 3;
@@ -59,7 +61,6 @@ function startGame(){
 	document.getElementById("startGame").style.display = "none";
 	document.getElementById("start").style.display = "none";
 	document.getElementById("info").style.display = "none";
-	document.getElementById("pause").style.display = "block";
 }
 
 //restarts the game from level 1
@@ -67,7 +68,6 @@ function restartGame() {
 	
 	document.getElementById("endgame").style.display = "none";
 	document.getElementById("restart").style.display = "none";
-	document.getElementById("pause").style.display = "block";
 	document.getElementById("lives").innerHTML = "♥ ♥ ♥";
 	
 	currentLevel = 0;
@@ -103,9 +103,9 @@ function showStartScreen(){
 
 //reloads a level
 function reloadLevel(){
+	document.getElementById("noBike").style.display = "none";
 	document.getElementById("lose").style.display = "none";
 	document.getElementById("retry").style.display = "none";
-	document.getElementById("pause").style.display = "block";
 	document.getElementById("lives").innerHTML = "♥ ○ ○";
 	playerLives = 1;
 	controlAnimation = true;
@@ -253,10 +253,16 @@ function tryToMove(direction){
 		}, 350);
 		return;
   } // if includes block
+	
+	// regain health from apple
+	if (nextClass == "apple") {
+		console.log("hi");
+		regainHealth();
+	}
   
   // if there is a rider, add rider
   if (nextClass == "rider") {
-	riderIsOn = true;  
+		riderIsOn = true;  
   }
   
   // if there is a bridge in the old location keep it
@@ -285,10 +291,12 @@ function tryToMove(direction){
   } //if
 
   // next level
-	if (nextClass == "goal" && riderIsOn) {
+	if (nextClass == "goal" && riderIsOn == true) {
 		levelNum++;
 		nextLevel(nextClass);
-	} //if
+	} else if(nextClass == "goal" && riderIsOn == false){
+		noBike();
+	}// else
 	
 } // tryToMove
 
@@ -296,12 +304,10 @@ function tryToMove(direction){
 function nextLevel(nextClass) {
 	if(levelNum != levels.length){
 	  document.getElementById("levelup").style.display = "block";  
-		document.getElementById("pause").style.display = "none"; 
 	  clearTimeout(currentAnimation);
 		document.removeEventListener("keydown", keyDown, false);
 	  setTimeout (function() {
 			document.getElementById("levelup").style.display = "none";  
-			document.getElementById("pause").style.display = "block"; 
 			currentLevel++;
 			moveRider();
 			loadLevel();
@@ -322,6 +328,7 @@ function loadLevel() {
   for (var i = 0; i < gridBoxes.length; i++){
     gridBoxes[i].className = levelMap[i];
     if(levelMap[i].includes("riderup")) currentLocationOfRider = i;
+		if(levelMap[i].includes("bridge")){currentLocationOfBridge = i;
   } // for
   
   animateBoxes = document.querySelectorAll(".animate");
@@ -335,8 +342,8 @@ function loadLevel() {
 // index - current location of animation
 // direction - current direction of animation
 function animateEnemy(boxes, index, direction) {
-	currentAnimation = false;
 	
+	//controls if the animation plays
 	if(controlAnimation == true){
 		
 		// exit function if no animation
@@ -416,19 +423,44 @@ function animateEnemy(boxes, index, direction) {
 	}//else
 }// animate enemy
 
+function regainHealth(){
+	if(playerLives == 2){
+		playerLives++;
+		document.getElementById("lives").innerHTML = "♥ ♥ ♥";
+		return;
+	} else if(playerLives == 1) {
+		playerLives++;
+		document.getElementById("lives").innerHTML = "♥ ♥ ○";
+		return;
+	} else if(playerLives == 3){
+		playerLives++;
+		document.getElementById("lives").innerHTML = "♥ ♥ ♥ ♥";
+		return;
+	} else if(playerLives == 4){
+		playerLives++;
+		document.getElementById("lives").innerHTML = "♥ ♥ ♥ ♥ ♥";
+		return;
+	}
+} // regainHealth()
+
 //shows end screen and stops the game
 function endGame(){
 	document.getElementById("endgame").style.display = "block";
 	document.getElementById("restart").style.display = "block";
-	document.getElementById("pause").style.display = "none";
 	controlAnimation = false;
   document.removeEventListener("keydown", keyDown, false);
-}
+} // endGame()
 
 function loseGame(){
 	document.getElementById("lose").style.display = "block";
 	document.getElementById("retry").style.display = "block";
-	document.getElementById("pause").style.display = "none";
+	controlAnimation = false;
+	document.removeEventListener("keydown", keyDown, false);
+} // loseGame()
+
+function noBike(){
+	document.getElementById("noBike").style.display = "block";
+	document.getElementById("retry").style.display = "block";
 	controlAnimation = false;
 	document.removeEventListener("keydown", keyDown, false);
 }
@@ -445,26 +477,13 @@ function hitEnemy(){
 		document.getElementById("lives").innerHTML = "○ ○ ○";
 		loseGame();
 		return;
-	}
+	} else if(playerLives == 3){
+		document.getElementById("lives").innerHTML = "♥ ♥ ♥";
+		return;
+	} else if(playerLives == 4){
+		document.getElementById("lives").innerHTML = "♥ ♥ ♥ ♥";
+		return;
+	} 
 	return;
-}
+} // hitEnemy()
 
-function pauseGame(){
-	document.getElementById("pause").style.display = "none";
-	document.getElementById("pauseScreen").style.display = "block";
-	document.getElementById("resume").style.display = "block";
-	controlAnimation = false;
-	document.removeEventListener("keydown", keyDown, false);
-}
-
-function resumeGame(){
-	document.getElementById("pause").style.display = "block";
-	document.getElementById("pauseScreen").style.display = "none";
-	document.getElementById("resume").style.display = "none";
-	controlAnimation = true;
-	console.log(currentBox);
-	console.log(currentDirection);
-	console.log(currentIndex);
-	animateEnemy(currentBox, currentIndex, currentDirection);
-	moveRider();
-}

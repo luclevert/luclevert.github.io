@@ -54,32 +54,48 @@ body {
 	color:white;
 }
 
+
+#titleimage{
+	width:500px;
+	height:500px;
+	border: thin white solid;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+#appleimage{
+	width:400px;
+	height:400px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
 .rider {
 	background-image:url("images/bike.png");
 }
 
 .blocker1 {
-	background-image:url("images/blocker1.png");
+	background-image:url("images/rock.png");
 }
 
 .obstacle2 {
-	background-image:url("images/Obstacle2.png");
+	background-image:url("images/pixeltree.png");
 }
 
 .goal{
-	background-image:url("images/goal.png");
+	background-image:url("images/simon.png");
 }
 
 .blockforward{
-  background-image:url("images/blockforward.png");
+  background-image:url("images/fenceforward.png");
 }
 
 .blockside{
-	background-image:url("images/blockside.png");
+	background-image:url("images/fenceside.png");
 }
 
 .water{
-	background-image:url("images/water.jpg");
+	background-image:url("images/water.png");
 }
 
 .riderleft {
@@ -129,15 +145,23 @@ body {
 }
 
 .enemyright {
-	background-image:url("images/enemyright.png");
+	background-image:url("images/monster1right.png");
 }
 
 .enemyleft {
-	background-image:url("images/enemyleft.png");
+	background-image:url("images/monster1left.png");
 }
 
-.bridge {
-	background-color:#800020 !important;
+.apple{
+	background-image:url("images/apple.png");
+}
+
+.bridgeup {
+	background-image:url("images/bridgehorizon");
+}
+
+.bridgeright {
+	background-image:url("images/bridgerightleft.png");
 }
 
 .message{
@@ -177,9 +201,9 @@ body {
   height:20px;
   background-color:#ffe5b9;
   color:#132743;
-  vertical-align:top;
+  
   text-align:center;
-  line-height:20px;
+  
   font-size:1em;
   border-radius:7px;
   padding-left:20px;
@@ -195,41 +219,44 @@ body {
 }
 
 #start{
+	left:54%;
 	bottom:115px;
-	left:55%;
 }
 
 #info{
 	bottom:115px;
-	left:30%;
+	left:35%;
 }
 
 #return{
-	left:43%;
-	bottom:115px;
+	position: relative;
+	width:25%;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:0;
+	margin-bottom:0;
+	top:0px;
 }
 
 #retry{
 	display:none;
-	left:42%;
-	bottom:115px;
+	position: relative;
+	width:25%;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:0;
+	margin-bottom:0;
+	top:110px;
 }
 
 #restart{
-	left:42%;
-	bottom:115px;
-}
-
-#pause{
-	display:none;
-	left:42%;
-	bottom:115px;
-}
-
-#resume{
-	display:none;
-	left:42%;
-	bottom:115px;
+	position: relative;
+	width:25%;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:0;
+	margin-bottom:0;
+	top:300px;
 }
 
 .message1{
@@ -262,3 +289,10 @@ body {
 #endgame {
 	display: none;
 }
+
+#noBike{
+	font-size:300%;
+}
+
+#levelup{
+	font-size: 300%;
