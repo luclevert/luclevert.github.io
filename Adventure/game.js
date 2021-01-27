@@ -10,30 +10,69 @@ const levels = [
 	// level 1
   ["goal", "water","apple", "", "obstacle2",
    "blockforward", "water", "blocker1", "", "rider",
-   "animate", "bridgeright animate", "animate", "animate", "animate",
+   "animate", "animate", "animate", "animate", "animate",
    "", "water", "obstacle2", "", "obstacle2",
    "", "water", "riderup", "", ""],
 	 
 	// level 2
   ["obstacle2", "obstacle2","goal", "obstacle2", "obstacle2",
    "animate", "animate", "animate", "animate", "animate",
-   "water", "bridgeup", "water", "water", "water",
+   "water", "", "water", "water", "water",
    "", "", "", "blockside", "",
    "rider", "blocker1", "", "", "riderup"],
 	 
 	// level 3
   ["obstacle2", "rider","blocker1", "water", "",
    "blocker1", "animate", "obstacle2", "water", "",
-   "goal", "animate", "", "bridgeright", "apple",
+   "goal", "animate", "", "", "apple",
    "blocker1", "animate", "blocker1", "water", "",
    "blocker1", "animate", "obstacle2", "water", "riderup"],
 	 
 	 // level 4
   ["obstacle2", "goal","obstacle2", "blocker1", "obstacle2",
    "blocker1", "", "blockside", "", "blocker1",
-   "water", "water", "water", "bridgeup", "water",
+   "water", "water", "water", "", "water",
    "animate", "animate", "animate", "animate", "animate",
    "blocker1", "riderup", "", "obstacle2", "rider"],
+
+];
+
+const levelsBackground = [
+
+  //level 0
+  ["grass", "grass", "grass", "grass", "grass",
+  "grass", "grass", "grass", "grass", "grass",
+  "grass", "grass", "grass", "grass", "grass",
+  "grass", "grass", "grass", "grass", "grass",
+  "grass", "grass", "grass", "grass", "grass"],
+
+	// level 1
+  ["grass", "grass","grass", "grass", "grass",
+   "grass", "grass", "grass", "grass", "grass",
+   "grass", "bridgeright", "grass", "grass", "grass",
+   "grass", "grass", "grass", "grass", "grass",
+   "grass", "grass", "grass", "grass", "grass"],
+	 
+	// level 2
+  ["grass", "grass","grass", "grass", "grass",
+   "grass", "grass", "grass", "grass", "grass",
+   "grass", "bridgeup", "grass", "grass", "grass",
+   "grass", "grass", "grass", "grass", "grass",
+   "grass", "grass", "grass", "grass", "grass"],
+	 
+	// level 3
+  ["grass", "grass", "grass", "grass", "grass",
+   "grass", "grass", "grass", "grass", "grass",
+   "grass", "grass", "grass", "bridgeright", "grass",
+   "grass", "grass", "grass", "grass", "grass",
+   "grass", "grass", "grass", "grass", "grass"],
+	 
+	 // level 4
+  ["grass", "grass", "grass", "grass", "grass",
+   "grass", "grass", "grass", "grass", "grass",
+   "grass", "grass", "grass", "bridgeup", "grass",
+   "grass", "grass", "grass", "grass", "grass",
+   "grass", "grass", "grass", "grass", "grass"],
 
 ];
 
@@ -44,6 +83,7 @@ const noPassObstacles = ["blocker1", "obstacle2", "water"];
 var currentLevel = 0; //starting level
 var levelNum = 0;
 var levelMap = levels[currentLevel];
+var levelMapBackground = levelsBackground[currentLevel];
 var riderIsOn = false; //is the rider on?
 var currentLocationOfRider = 0;
 var currentLocationOfBridge = 0;
@@ -256,7 +296,6 @@ function tryToMove(direction){
 	
 	// regain health from apple
 	if (nextClass == "apple") {
-		console.log("hi");
 		regainHealth();
 	}
   
@@ -320,6 +359,7 @@ function nextLevel(nextClass) {
 // load levels 0 - max level
 function loadLevel() {
 	levelMap = levels[currentLevel];
+	levelMapBackground = levelsBackground[currentLevel];
   let animateBoxes;
   riderIsOn = false;
 	let direction;
@@ -327,8 +367,9 @@ function loadLevel() {
   // load board
   for (var i = 0; i < gridBoxes.length; i++){
     gridBoxes[i].className = levelMap[i];
+		gridBoxesBackground[i].className = levelMapBackground[i];
     if(levelMap[i].includes("riderup")) currentLocationOfRider = i;
-		if(levelMap[i].includes("bridge"))currentLocationOfBridge = i;
+		
   } // for
   
   animateBoxes = document.querySelectorAll(".animate");

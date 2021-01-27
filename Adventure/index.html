@@ -1,7 +1,10 @@
 <!DOCTYPE html>
   <html lang="en">
   <head>
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <meta charset="utf-8">
+		<link rel='icon' href='images/favicon.ico' type='image/x-icon' >
     <title>Albert and Simon's Adventure</title>
     
     <!-- include an external style sheet -->
@@ -79,7 +82,7 @@
     <div class="screen" id="startGame">
 			<h1 class="message1">Welcome to</h1>
 			<h2 class="message2">Albert and Simon's Adventure!</h2>
-			<img id="titleimage" src="images/sillouhete.png">
+			<img id="titleimage" src="images/sillouhete.png" alt="Sillouettes of a boy and his cat">
 		</div>
 		
 		<div id="infoScreen">
@@ -105,7 +108,7 @@
 			<br><br>
 			Or you may never see your home again.
 			</p>
-			<img id="appleimage" src="images/appleimage.png">
+			<img id="appleimage" src="images/appleimage.png" alt="White Apple">
 			<div onclick="showStartScreen()" class="controls" id="return">Return</div>
 		</div>
 		
@@ -113,6 +116,7 @@
 			<h1 class="message1">Congratulations!</h1>
 			<h2 class="message2">Albert and Simon successfully <br>made it home safely!</h2>
 			<div id="thanks">Thank you for playing this very short game!</div>
+			<img src="images/boyright.png">
 			<div id="question">Click Restart to restart the game from level 1.</div>
 			<div onclick="restartGame()" class="controls" id="restart">Restart</div>
 		</div>
@@ -120,7 +124,7 @@
 		<div class="message" id="lose">You Died!</div>
 		<div class="message" id="noBike">You forgot your bike!</div>
 		<div class="message" id="levelup">Next Level...</div>
-		<div class="message" id="pauseScreen">Paused</div>
+
 	
 		<div onclick="startGame()" class="controls" id="start">Start</div>
 		<div onclick="showInfo()" class="controls" id="info">Info</div>
