@@ -23,10 +23,10 @@ const levels = [
 	 
 	// level 3
   ["obstacle2", "rider","blocker1", "water", "",
-   "blocker1", "animate", "obstacle2", "water", "",
-   "goal", "animate", "", "", "apple",
-   "blocker1", "animate", "blocker1", "water", "",
-   "blocker1", "animate", "obstacle2", "water", "riderup"],
+   "blocker1", "", "", "water", "",
+   "", "animate", "animate", "animate", "animate",
+   "blockforward", "obstacle2", "blocker1", "water", "",
+   "", "goal", "obstacle2", "water", "riderup"],
 	 
 	 // level 4
   ["obstacle2", "goal","obstacle2", "blocker1", "obstacle2",
