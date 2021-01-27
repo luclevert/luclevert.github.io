@@ -61,6 +61,14 @@ body {
 	margin-right:auto;
 }
 
+#endimage{
+	width:300px;
+	height:300px;
+	border: thin white solid;
+	margin-left:auto;
+	margin-right:auto;
+}
+
 #appleimage{
 	width:400px;
 	height:400px;
@@ -258,7 +266,7 @@ body {
 	margin-right:auto;
 	margin-top:0;
 	margin-bottom:0;
-	top:300px;
+	top:30px;
 }
 
 .message1{
@@ -270,6 +278,7 @@ body {
 	top:175px;
 	font-size: 45px;
 }
+
 
 #infoScreen{
 	display:none;
@@ -294,4 +303,8 @@ body {
 
 #levelup{
 	font-size: 300%;
+}
+
+#clickrestart{
+	margin-bottom:10px;
 }
