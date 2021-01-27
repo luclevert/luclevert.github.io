@@ -1,4 +1,3 @@
-
 body {
  background-color:black;
  font-family: 'Press Start 2P', cursive;
@@ -13,6 +12,7 @@ body {
 }
 
 #gameBoard {
+	border: thin white solid;
 	position:absolute;
 	top:0px;
 	left:0px;
@@ -48,6 +48,8 @@ body {
 }
 
 #lives{
+	top:5px;
+	position: relative;
 	text-align:center;
 	color:white;
 }
@@ -74,6 +76,12 @@ body {
 	height:400px;
 	margin-left:auto;
 	margin-right:auto;
+}
+
+#time{
+	display:block;
+	color:white;
+	font-size: 35px;
 }
 
 .rider {
@@ -203,69 +211,66 @@ body {
 }
 
 .controls{
-	display:block;
-	position: fixed;
+	transition: 0.4s;
+	display:inline-block;
 	z-index: 2;
   padding:15px;
   width:160px;
   height:20px;
-  background-color:#ffe5b9;
-  color:#132743;
-  
+  background-color:black;
+  color:white;
   text-align:center;
-  
   font-size:1em;
-  border-radius:7px;
   padding-left:20px;
   padding-right:20px;
   letter-spacing:2px;
+	position:relative;
+	bottom:0px;
+	margin-top:0;
+	border: thick white solid;
+	margin-bottom:0;
 } 
 
 .controls:hover{
 	background-color: white;
+	border: thick black solid;
 	letter-spacing:5px;
 	color: black;
 	transition: 0.4s;
 }
 
 #start{
-	left:54%;
-	bottom:115px;
+	margin-top:10px;
+	margin-right:auto;
 }
 
 #info{
-	bottom:115px;
-	left:35%;
+	margin-top:10px;
+	margin-left:auto;
 }
 
 #return{
 	position: relative;
-	width:25%;
+	width:50%;
 	margin-left:auto;
 	margin-right:auto;
 	margin-top:0;
 	margin-bottom:0;
-	top:0px;
+	bottom:15px;
 }
 
 #retry{
 	display:none;
-	position: relative;
 	width:25%;
 	margin-left:auto;
 	margin-right:auto;
-	margin-top:0;
-	margin-bottom:0;
 	top:110px;
 }
 
 #restart{
-	position: relative;
 	width:25%;
 	margin-left:auto;
 	margin-right:auto;
-	margin-top:0;
-	margin-bottom:0;
 	top:30px;
 }
 
@@ -278,7 +283,6 @@ body {
 	top:175px;
 	font-size: 45px;
 }
-
 
 #infoScreen{
 	display:none;

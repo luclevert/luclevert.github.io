@@ -134,11 +134,12 @@ function showInfo(){
 
 //shows start screen
 function showStartScreen(){
+	document.getElementById("endgame").style.display = "none";
 	document.getElementById("infoScreen").style.display = "none";
 	document.getElementById("return").style.display = "none";
 	document.getElementById("startGame").style.display = "block";
-	document.getElementById("start").style.display = "block";
-	document.getElementById("info").style.display = "block";
+	document.getElementById("start").style.display = "inline-block";
+	document.getElementById("info").style.display = "inline-block";
 } // showStartScreen
 
 //reloads a level
@@ -373,7 +374,6 @@ function loadLevel() {
   } // for
   
   animateBoxes = document.querySelectorAll(".animate");
-  
   animateEnemy(animateBoxes, 0, "right");
 
 } // loadLevel
@@ -528,3 +528,17 @@ function hitEnemy(){
 	return;
 } // hitEnemy()
 
+//By a person on stack overflow
+function timeInLevel(){
+	var timeleft = 100;
+	var downloadTimer = setInterval(function(){
+		if(timeleft <= 0 ){
+			clearInterval(downloadTimer);
+			document.getElementById("time").innerHTML = "Finished";
+			loseGame();
+		}else {
+		  document.getElementById("time").value = 10 - timeleft;
+		}
+		timeleft -= 1;
+	}, 1000);
+}

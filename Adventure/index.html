@@ -79,10 +79,15 @@
 			<div></div>
 		</div>
 </div> <!-- container-->
+
+<div id="time"></div>
+
     <div class="screen" id="startGame">
 			<h1 class="message1">Welcome to</h1>
 			<h2 class="message2">Albert and Simon's Adventure!</h2>
-			<img id="titleimage" src="images/sillouhete.png" alt="Sillouettes of a boy and his cat">
+			<img id="titleimage" src="images/sillouhete.png" alt="Sillouettes of a boy and his cat"><br>
+			<div onclick="startGame()" class="controls" id="start">Start</div>
+			<div onclick="showInfo()" class="controls" id="info">Info</div>
 		</div>
 		
 		<div id="infoScreen">
@@ -109,7 +114,7 @@
 			Or you may never see your home again.
 			</p>
 			<img id="appleimage" src="images/appleimage.png" alt="White Apple">
-			<div onclick="showStartScreen()" class="controls" id="return">Return</div>
+			<div onclick="showStartScreen()" class="controls" id="return">Return To Start Screen</div>
 		</div>
 		
 		<div class="screen" id="endgame">
@@ -123,10 +128,6 @@
 		<div class="message" id="lose">You Died!</div>
 		<div class="message" id="noBike">You forgot your bike!</div>
 		<div class="message" id="levelup">Next Level...</div>
-
-	
-		<div onclick="startGame()" class="controls" id="start">Start</div>
-		<div onclick="showInfo()" class="controls" id="info">Info</div>
 		<div onclick="reloadLevel()" class="controls" id="retry">Retry</div>
 		
 	
