@@ -264,7 +264,7 @@ body {
 	width:25%;
 	margin-left:auto;
 	margin-right:auto;
-	top:110px;
+
 }
 
 #restart{
@@ -295,6 +295,25 @@ body {
   color:white;
   vertical-align:top;
   text-align:center;
+}
+
+#time{
+	position: relative;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:30px;
+	text-align:center;
+}
+
+progress {
+  height: 22px;
+  border: thick white solid;
+}
+progress::-webkit-progress-bar {
+	background-color: black;
+}
+progress::-webkit-progress-value {
+  background-color: white;
 }
 
 #endgame {

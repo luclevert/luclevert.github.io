@@ -91,6 +91,7 @@ var currentAnimation; //allows 1 animation per level
 var widthOfBoard = 5;
 var playerLives = 3;
 var controlAnimation = true;
+var downloadTimer;
 
 var currentBox;
 var currentDirection;
@@ -98,6 +99,7 @@ var currentIndex;
 
 //start game
 function startGame(){
+	timeInLevel();
 	document.getElementById("startGame").style.display = "none";
 	document.getElementById("start").style.display = "none";
 	document.getElementById("info").style.display = "none";
@@ -120,6 +122,8 @@ function restartGame() {
 	currentAnimation = null;
 	controlAnimation = true;
 	
+	clearInterval(downloadTimer);
+	timeInLevel();
 	moveRider();
 	loadLevel();
 } //restartGame
@@ -144,6 +148,8 @@ function showStartScreen(){
 
 //reloads a level
 function reloadLevel(){
+	clearInterval(downloadTimer);
+	timeInLevel();
 	document.getElementById("noBike").style.display = "none";
 	document.getElementById("lose").style.display = "none";
 	document.getElementById("retry").style.display = "none";
@@ -346,6 +352,8 @@ function nextLevel(nextClass) {
 	  document.getElementById("levelup").style.display = "block";  
 	  clearTimeout(currentAnimation);
 		document.removeEventListener("keydown", keyDown, false);
+		clearInterval(downloadTimer);
+		timeInLevel();
 	  setTimeout (function() {
 			document.getElementById("levelup").style.display = "none";  
 			currentLevel++;
@@ -372,7 +380,6 @@ function loadLevel() {
     if(levelMap[i].includes("riderup")) currentLocationOfRider = i;
 		
   } // for
-  
   animateBoxes = document.querySelectorAll(".animate");
   animateEnemy(animateBoxes, 0, "right");
 
@@ -486,6 +493,7 @@ function regainHealth(){
 
 //shows end screen and stops the game
 function endGame(){
+	clearInterval(downloadTimer);
 	document.getElementById("endgame").style.display = "block";
 	document.getElementById("restart").style.display = "block";
 	controlAnimation = false;
@@ -493,6 +501,7 @@ function endGame(){
 } // endGame()
 
 function loseGame(){
+	clearInterval(downloadTimer);
 	document.getElementById("lose").style.display = "block";
 	document.getElementById("retry").style.display = "block";
 	controlAnimation = false;
@@ -500,6 +509,7 @@ function loseGame(){
 } // loseGame()
 
 function noBike(){
+	clearInterval(downloadTimer);
 	document.getElementById("noBike").style.display = "block";
 	document.getElementById("retry").style.display = "block";
 	controlAnimation = false;
@@ -530,15 +540,17 @@ function hitEnemy(){
 
 //By a person on stack overflow
 function timeInLevel(){
-	var timeleft = 100;
-	var downloadTimer = setInterval(function(){
-		if(timeleft <= 0 ){
+	var timeleft = 60;
+	downloadTimer = setInterval(function(){
+		if(timeleft <= 0){
 			clearInterval(downloadTimer);
-			document.getElementById("time").innerHTML = "Finished";
+			document.getElementById("timeText").innerHTML = "Finished";
+			document.getElementById("timerBar").value = timeleft;
 			loseGame();
-		}else {
-		  document.getElementById("time").value = 10 - timeleft;
-		}
-		timeleft -= 1;
+		} else {
+			document.getElementById("timerBar").value = timeleft;
+			document.getElementById("timeText").innerHTML = timeleft + " seconds remaining";
+		} //else
+  timeleft -= 1;
 	}, 1000);
 }
